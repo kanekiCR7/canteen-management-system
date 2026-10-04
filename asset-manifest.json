@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/canteen-management-system/static/css/main.1ce1c341.css",
-    "main.js": "/canteen-management-system/static/js/main.6bb0b8d9.js",
+    "main.js": "/canteen-management-system/static/js/main.b0cb8e76.js",
     "index.html": "/canteen-management-system/index.html",
     "main.1ce1c341.css.map": "/canteen-management-system/static/css/main.1ce1c341.css.map",
-    "main.6bb0b8d9.js.map": "/canteen-management-system/static/js/main.6bb0b8d9.js.map"
+    "main.b0cb8e76.js.map": "/canteen-management-system/static/js/main.b0cb8e76.js.map"
   },
   "entrypoints": [
     "static/css/main.1ce1c341.css",
-    "static/js/main.6bb0b8d9.js"
+    "static/js/main.b0cb8e76.js"
   ]
 }
