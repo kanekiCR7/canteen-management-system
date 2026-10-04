@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import API from '../api';
 
 function HomePage() {
   const [featuredItems, setFeaturedItems] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/items')
+    API.get('/api/items')
       .then(res => setFeaturedItems(res.data.slice(0, 4)))
       .catch(() => {}); // Fail silently on home page
   }, []);
