@@ -17,7 +17,11 @@ const itemRoutes = require('./routes/items');
 const orderRoutes = require('./routes/orders');
 const authRoutes = require('./routes/auth');
 
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CLIENT_URL || '*',
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
