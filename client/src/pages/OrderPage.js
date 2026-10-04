@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import API from '../api';
 import { useAuth } from '../context/AuthContext';
 
 function OrderPage() {
@@ -37,7 +37,7 @@ function OrderPage() {
 
   // Fetch items from DB on load
   useEffect(() => {
-    axios.get('http://localhost:5000/api/items')
+    API.get('/api/items')
       .then(res => {
         setMenuItems(res.data);
         // Set the initially selected item object
@@ -67,7 +67,7 @@ function OrderPage() {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/orders', formData);
+      const response = await API.post('/api/orders', formData);
       navigate('/payment', { state: { order: response.data } });
     } catch (err) {
       // Fallback in-memory order if server is unreachable

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import API from '../api';
 
 function RegisterPage() {
   const [successMessage, setSuccessMessage] = useState('');
@@ -21,7 +21,7 @@ function RegisterPage() {
     setErrorMessage('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await API.post('/api/auth/register', {
         name: data.name,
         email: data.email,
         password: data.password

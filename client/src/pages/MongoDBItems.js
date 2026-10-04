@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import API from '../api';
 
 function MongoDBItems() {
   const [items, setItems] = useState([]);
@@ -13,7 +13,7 @@ function MongoDBItems() {
 
   const fetchItems = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/items');
+      const response = await API.get('/api/items');
       setItems(response.data);
     } catch (error) {
       console.error('Error fetching items:', error);
@@ -34,7 +34,7 @@ function MongoDBItems() {
     setIsError(false);
 
     try {
-      await axios.post('http://localhost:5000/api/items', {
+      await API.post('/api/items', {
         name: formData.name,
         price: Number(formData.price),
         icon: formData.icon
@@ -58,7 +58,7 @@ function MongoDBItems() {
     setIsError(false);
 
     try {
-      await axios.delete(`http://localhost:5000/api/items/${id}`);
+      await API.delete(`/api/items/${id}`);
       setMessage(`"${name}" was deleted successfully.`);
       fetchItems();
     } catch (error) {

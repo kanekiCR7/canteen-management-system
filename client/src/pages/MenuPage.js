@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import API from '../api';
 
 function MenuPage() {
   const [items, setItems] = useState([]);
@@ -8,7 +8,7 @@ function MenuPage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/items')
+    API.get('/api/items')
       .then(res => setItems(res.data))
       .catch(() => setError('Could not load menu. Is the server running?'))
       .finally(() => setLoading(false));

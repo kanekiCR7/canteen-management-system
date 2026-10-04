@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import API from '../api';
 import { useAuth } from '../context/AuthContext';
 
 function LoginPage() {
@@ -27,7 +27,7 @@ function LoginPage() {
     setIsError(false);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await API.post('/api/auth/login', {
         email: data.email,
         password: data.password
       });
