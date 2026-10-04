@@ -10,7 +10,7 @@ function MenuPage() {
   useEffect(() => {
     API.get('/api/items')
       .then(res => setItems(res.data))
-      .catch(() => setError('Could not load menu. Is the server running?'))
+      .catch(() => setError('Error Loading Menu'))
       .finally(() => setLoading(false));
   }, []);
 
