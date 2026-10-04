@@ -17,9 +17,21 @@ const itemRoutes = require('./routes/items');
 const orderRoutes = require('./routes/orders');
 const authRoutes = require('./routes/auth');
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://kanekiCR7.github.io',
+  process.env.CLIENT_URL,
+].filter(Boolean);
+
 const corsOptions = {
-  origin: process.env.CLIENT_URL || '*',
-  credentials: true,
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.some(allowed => origin.startsWith(allowed))) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
 };
 app.use(cors(corsOptions));
 app.use(express.json());
