@@ -17,23 +17,40 @@ const itemRoutes = require('./routes/items');
 const orderRoutes = require('./routes/orders');
 const authRoutes = require('./routes/auth');
 
+// List of allowed origins
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://kanekiCR7.github.io',
+  'https://kanekicr7.github.io',
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
+// Dynamic CORS configuration (handles casing & trailing slashes automatically)
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, curl, Postman)
+    // Allow requests with no origin (mobile apps, Postman, curl)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.some(allowed => origin.startsWith(allowed))) {
+
+    const originLower = origin.toLowerCase().replace(/\/$/, '');
+    const isAllowed = allowedOrigins.some((allowed) => {
+      const allowedLower = allowed.toLowerCase().replace(/\/$/, '');
+      return originLower === allowedLower || originLower.startsWith(allowedLower);
+    });
+
+    if (isAllowed) {
       return callback(null, true);
     }
     return callback(new Error('Not allowed by CORS'));
   },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  optionsSuccessStatus: 200 // Fixes issues on legacy browsers
 };
+
+// Apply CORS middleware
 app.use(cors(corsOptions));
+
+// Express body parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
